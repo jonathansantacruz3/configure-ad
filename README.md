@@ -172,16 +172,64 @@ Copy DC's private IP address.
 
 ![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/705cabc8-6004-44a8-8f25-3e82ccf4f07b)
 
+![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/9f814a75-a0b1-4211-bed7-8a05b1379565)
+
+![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/eacc2286-e499-4762-9c58-425d5e893fb3)
+
+
 
 
 <h3>Setup Remote Desktop for non-administrative users on Client-1</h3>
 
 In the Client-1 machine, I right clicked the start menu and chose "system" > "remote desktop" > User accounts : "select users that can remotely access this PC". In the next window I clicked on "Add" and instead of adding individual names, it is more efficient to add a group. In this case, I typed in "Domain Users" and applied it. Back in DC (Users & computers > mydomain.com > Users > Domain Users) I saw who was already part of that group. This configuration allowed any non-adminstrative users to login using Client-1.  
 
+Login to Client-1:
+
+![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/5a3f949a-5211-4d35-bd25-981dd7a45815)
+
+![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/2e864b4d-4807-4da3-9ca3-012803abc7d1)
+
+![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/abe6e3d9-a75d-44e6-b3ab-7e313113a226)
+
+![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/736b74cd-6902-4fe7-9884-e880181bf7b2)
+
+![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/cd83885e-d659-446c-ba5b-09f41c6045d8)
+
+![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/400b631e-dc3f-4183-a19b-88e147f0e834)
+
+
+
 
 <h3>Create a bunch of additional users and attempt to log into client-1 with one of the use</h3>
 
 I logged in to DC as Jane_admin and opened up a Powershell terminal with administrative permissions and opened a new file. For this section of the project I utilized a script to generate random name accounts into the "_EMPLOYEES" folder by pasting the script contents into the new file in Powershell and running it. I then went back to "Users and Computers" and refreshed it so that it would populate the new users created with the script. By using one of these random users I was able to log into Client-1. Once this is set up I am able to unlock accounts, disable accounts, reset passwords, apply group policies, etc. from within the DC. AD is useful, especially for large companies, for managing resources and accounts. 
+
+DC machine:
+
+![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/e6b987d6-a082-446b-aac4-5b862583df26)
+
+Open as administrator.
+
+![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/994a29d5-03a2-4eb5-940e-fb8abcb91ffc)
+
+Paste this script into Powershell and run it. 
+
+![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/d3e30bfe-7c13-4cf4-8d85-2328aca2fbfb)
+
+![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/551efb84-e176-4986-be41-fec3e4c6ed32)
+
+![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/24a69266-11e8-4470-8f64-e1b81ebafe99)
+
+![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/ca308933-a844-43e1-9537-816f4e761493)
+
+![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/ad5b8ae6-38b9-4f3e-80cc-c3ae1e1bea36)
+
+![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/5b1c2d36-ac45-43c3-ae62-1ffe63fe4e9a)
+
+![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/92cc212f-9bd1-4bed-b49f-25dbb755912a)
+
+![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/5cc388cb-9cff-4ab3-9428-3c7763bea5bd)
+
 
 Thanks for reading! 
 
