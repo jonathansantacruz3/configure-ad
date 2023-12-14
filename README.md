@@ -49,41 +49,30 @@ To set the network interface card (NIC) IP address to static, I navigated to the
 
 <h3>Ensure Connectivity between the client and Domain Controller</h3>
 
+In this step, I needed to verify connectivity between both machines by issuing a ping to the DC from CLient-1. I Used Remote Desktop to login into the DC machine and in the search bar I typed in Windows Firewall with advanced security to locate the local Windows firewall to enable ICMP messages. I then signed into Client-1, opened up a Powershell terminal and pinged the DC by its private IP address. 
+
+
 
 <h3>Install Active Directory</h3>
 
+In the DC machine I opened up the Server Manager to start the configuration on the server. The first step was to click on the "Add roles and features" and install AD Domain Services. After it is installed, in the top right corner there a yellow notification sign that allowed me to finish setting up the machine as a domain controller. In the deployment window, I chose the "Add a new forest" option and named it "mydomain.com". Once installation of AD DS was complete, it restarrted the machine and instead of using the original credentials I used the first time, I had to use the fully qualified domain name created with the DC.  
 
 <h3>Create an Admin and Normal User Account in AD</h3>
+
+It is bad practice to use the generic account AD DS assigns when it is deployed. It will usually attach the FQDN and the genric username and other acounts to it which is unprofessional and not ideal. I had to create a normal user account by searching for "Active Directory Users and Computers". On the left pane, under mydoamin.com I added two organizational units, "_EMPLOYEES" and "_ADMINS". In the ADMIN folder, I created a new user by right clicking in the open space and added user "Jane Doe" with a user logon name of: jane_admin@mydomain.com. In order to assign this user permissions I right clicked on the name after it was set and chose "porperties". In the "Member of" tab I clicked on "Add" and in the "Enter object names to select" box I typed "domain" and clicked "Check Names" to select the "Domain Admins". After I applied the settings, Jane Doe was part of that Admin group. I then logged off and logged back on as Jane Doe (mydomain.com\jane_admin)  
 
 
 <h3>Join Client-1 to your domain (mydomain.com)</h3>
 
+The first change I made here was set Client-1's DNS settings to the DC's private IP address so that it will not use the virtual network's DNS server. Within the Client-1 machine I right clicked the start menu and chose "system" > "rename this PC (advanced)" > change the domain. I chose the "domain" option and typed in "mydomain.com". I then navigated to the Azure portal, copied the DC's NIC private address, located the Client-1's network interface link in "Networking", clicked on "DNS settings" and chose the "custom" option to input DC's private IP address. I then refreshed the the portal so that it flushes the DNS cache. After it refreshes, I logged into Client-1 with it's new IP address. I wanted to verify that it was set to the DC's DNS server so I used the command line "ipconfig" to show me the DNS server it was on. Once the verification was complete, and I pressed "OK" on the rename my PC window, the system prompted me to enter a new set of credentials. I entered the administrator Jane Doe (mydomain.com\jane_admin), my password and the machine restarted. Since Client-1 is now part of the domain mydomain.com, it will ask for the new set of credentials when logging in through Remote Desktop to reflect that. 
+
 
 <h3>Setup Remote Desktop for non-administrative users on Client-1</h3>
+
+In the Client-1 machine, I right clicked the start menu and chose "system" > "remote desktop" > User accounts : "select users that can remotely access this PC". In the next window I clicked on "Add" and instead of adding individual names, it is more efficient to add a group. In this case, I typed in "Domain Users" and applied it. Back in DC (Users & computers > mydomain.com > Users > Domain Users) I saw who was already part of that group. This configuration allowed any non-adminstrative users to login using Client-1.  
 
 
 <h3>Create a bunch of additional users and attempt to log into client-1 with one of the use</h3>
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
+I logged in to DC as Jane_admin and opened up a Powershell terminal with administrative permissions and opened a new file. For this section of the project I utilized a script to generate random name accounts into the "_EMPLOYEES" folder by pasting the script contents into the new file in Powershell and running it. I then went back to "Users and Computers" and refreshed it so that it would populate the new users created with the script. By using one of these random users I was able to log into Client-1.  
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
