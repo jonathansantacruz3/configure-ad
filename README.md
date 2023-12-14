@@ -74,5 +74,7 @@ In the Client-1 machine, I right clicked the start menu and chose "system" > "re
 
 <h3>Create a bunch of additional users and attempt to log into client-1 with one of the use</h3>
 
-I logged in to DC as Jane_admin and opened up a Powershell terminal with administrative permissions and opened a new file. For this section of the project I utilized a script to generate random name accounts into the "_EMPLOYEES" folder by pasting the script contents into the new file in Powershell and running it. I then went back to "Users and Computers" and refreshed it so that it would populate the new users created with the script. By using one of these random users I was able to log into Client-1.  
+I logged in to DC as Jane_admin and opened up a Powershell terminal with administrative permissions and opened a new file. For this section of the project I utilized a script to generate random name accounts into the "_EMPLOYEES" folder by pasting the script contents into the new file in Powershell and running it. I then went back to "Users and Computers" and refreshed it so that it would populate the new users created with the script. By using one of these random users I was able to log into Client-1. Once this is set up I am able to unlock accounts, disable accounts, reset passwords, apply group policies, etc. from within the DC. AD is useful, especially for large companies, for managing resources and accounts. 
+
+Thanks for reading! 
 
