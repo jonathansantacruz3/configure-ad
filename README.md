@@ -1,4 +1,4 @@
-![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/5eacb21e-6f95-4e22-8a1b-afba0a83f8a7)<p align="center">
+<p align="center">
 <img src="https://i.imgur.com/pU5A58S.png" alt="Microsoft Active Directory Logo"/>
 </p>
 
@@ -43,6 +43,8 @@ In the following steps I will go over how to utilize virtualization within Azure
 <h3>Setup Resources in Azure</h3>
 
 The first things I created were two virtual machines (VMs) in my Azure subscription. The first VM (Windows Server 2022) was to act as the domain controller and the second VM (Windows 10 Pro) was used as the client computer. After these VMs are created, Azure creates a subnet and a virtual network automatically among other resources. When configuring a domain controller, it is essential that the IP private address assigned to it is configured to be set to static. In other words, it needed to stay the same address. The client will automatically try to locate the DC using the virtual network DNS server it was assigned to it when it was created. When AD is deployed into the DC, it will also install its own DNS service. I needed to configure which DNS service the client will use to successfully be able to connect to the DC.
+
+
 
 ![image](https://github.com/jonathansantacruz3/configure-ad/assets/151465848/ba89e805-c40b-48d5-b1b5-fc0678633d8f)
 
